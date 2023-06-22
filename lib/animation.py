@@ -9,7 +9,7 @@ class Animation():
     def load_animation(self, text):
 
         # String to be displayed when the application is loading
-        load_str = " "*10 + text
+        load_str = " "*12 + text
         ls_len = len(load_str)
 
 
@@ -68,9 +68,9 @@ class Animation():
             counttime = counttime + 1
 
         # for windows OS
-        if os.name =="nt":
-            os.system("cls")
+        #if os.name =="nt":
+        #    os.system("cls")
 
         # for linux / Mac OS
-        else:
-            os.system("clear")
+        #else:
+        #    os.system("clear")
