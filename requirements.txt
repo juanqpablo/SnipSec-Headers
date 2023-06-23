@@ -1,0 +1,4 @@
+requests==2.26.0
+colorama==0.4.4
+json==0.9.7
+argparse==1.4.0
