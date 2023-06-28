@@ -6,7 +6,7 @@
     },
     "Strict-Transport-Security": {
       "recommended_value": "max-age=31536000; includeSubDomains; preload",
-      "description": "Description of Strict-Transport-Security and its purpose."
+      "description": "HSTS es una medida de seguridad importante para garantizar una comunicación segura a través de HTTPS. "
     },
     "X-Frame-Options": {
       "recommended_value": "SAMEORIGIN",
@@ -19,7 +19,14 @@
     "X-Content-Type-Options": {
       "recommended_value": "nosniff",
       "description": "Description of X-Content-Type-Options and its purpose."
+    },
+    "Referer-Policy": {
+      "recommended_value": "strict-origin-when-cross-origin",
+      "description": "La cabecera Referrer-Policy controla cómo se envía el encabezado 'Referer' en las solicitudes HTTP. Al utilizar 'strict-origin-when-cross-origin', se busca equilibrar la compatibilidad con los sitios web que pueden requerir información completa del 'Referer' para funcionar correctamente, al tiempo que se minimiza la exposición de información sensible a terceros"
+    },
+    "Permissions-Policy": {
+      "recommended_value": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+      "description": "Description of X-Content-Type-Options and its purpose."
     }
-
   }
 }

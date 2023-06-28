@@ -1,6 +1,6 @@
 import argparse
 from urllib.parse import urlparse
-import json
+import json, time
 from lib.lib_snipsec import Snipsec
 from lib.animation import Animation
 import colorama
@@ -62,10 +62,10 @@ def scan_headers(url=None, headers=None, method=None, body=None, request_file=No
     res = sec.snip_request(url, method, headers_dict, body)
 
     print_banner()
-    animation.load_animation(f"Escaneando cabeceras de seguridad para <<{url}>>...")
+    animation.load_animation(f"Escaneando cabeceras de seguridad para << {url} >>...")
     print("\n")
     print(" " * 12 + Fore.GREEN + "-" * 80)
-    print(" " * 12 + Fore.GREEN + f">>> Resultados TARGET: <<{url}>>")
+    print(" " * 12 + Fore.GREEN + f">>> Resultados TARGET: <<{url}>> | FECHA " + time.strftime('%d/%m/%y') + " | HORA "+time.strftime("%H:%M:%S"))
     print(" " * 12 + Fore.GREEN + "-" * 80)
     print("")
 
@@ -73,7 +73,7 @@ def scan_headers(url=None, headers=None, method=None, body=None, request_file=No
 
     # Obtener los encabezados y sus valores de configuración
     headers = res.headers.items()
-
+    status = ""
    # Obtener los encabezados de seguridad y sus valores de configuración
     for header in security_headers:
         recommended_value = recommended_values.get(header, "")
@@ -81,13 +81,16 @@ def scan_headers(url=None, headers=None, method=None, body=None, request_file=No
 
         if header_value == recommended_value:
             status = Fore.GREEN + "[ VALIDATED ]" + Style.RESET_ALL
-            #INFO = "La cabecera se encuentra configurada correctamente."
+            INFO = "La cabecera se encuentra configurada correctamente."
         else:
-            status = Fore.YELLOW + "[  WARNING  ]" + Style.RESET_ALL
-            INFO = "Cabecera no configurada o no posee valores recomendados."
+            if header_value:
+                status = Fore.YELLOW + "[  WARNING  ]" + Style.RESET_ALL
+                INFO = "La cabecera se encuentra configurada, pero no posee los valores recomendados."
 
-            if header_value!="":
-                INFO += " Valor de configuración actual: " + header_value
+
+            else:
+                status = Fore.YELLOW + "[  WARNING  ]" + Style.RESET_ALL
+                INFO = "La cabecera no se encuentra configurada"
 
         header_output = (
             Fore.GREEN
@@ -114,7 +117,7 @@ def scan_headers(url=None, headers=None, method=None, body=None, request_file=No
             + "]"
         )
 
-        print(" " * 12 + header_output + column_output)
+        print(" " * 12 +  header_output + column_output)
         print()
         if header_value!="":
             print(" " * 14 +   " ["
@@ -126,17 +129,47 @@ def scan_headers(url=None, headers=None, method=None, body=None, request_file=No
                                 + Style.BRIGHT
                                 + "] " + header_value)
             print()
-        if header_value== "" or header_value==None:
+
             print(" " * 14 +    " ["
                                 + Fore.CYAN
                                 + Style.BRIGHT
-                                + "INFO"
+                                + "!"
                                 + Style.RESET_ALL
                                 + Fore.WHITE
                                 + Style.BRIGHT
                                 + "] " + INFO)
 
+            print(" " * 14 +    " ["
+                                + Fore.GREEN
+                                + Style.DIM
+                                + Style.BRIGHT
+                                + "¡"
+                                + Style.RESET_ALL
+                                + Fore.WHITE
+                                + Style.BRIGHT
+                                + "] " + recommended_value)
+
+        else:
+            print(" " * 14 +    " ["
+                                + Fore.RED
+                                + Style.BRIGHT
+                                + "!"
+                                + Style.RESET_ALL
+                                + Fore.WHITE
+                                + Style.BRIGHT
+                                + "] " + INFO)
+
+            print(" " * 14 +    " ["
+                                + Fore.GREEN
+                                + Style.BRIGHT
+                                + "¡"
+                                + Style.RESET_ALL
+                                + Fore.WHITE
+                                + Style.BRIGHT
+                                + "] " + recommended_value)
         print()
+
+
     print("\n")
     print(" " * 12 + Fore.GREEN + ">>> Proceso finalizado")
 
