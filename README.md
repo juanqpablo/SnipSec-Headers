@@ -2,7 +2,7 @@
 
 ## Descripción
 
-La Herramienta ***SnipSec Headers*** es una herramienta de análisis de seguridad diseñada para evaluar la configuración de las cabeceras de seguridad en aplicaciones web y APIs. Proporciona una forma rápida y sencilla de escanear y verificar la presencia y configuración adecuada de diversas cabeceras de seguridad comunes.
+***SnipSec Headers*** es una herramienta de análisis de seguridad diseñada para evaluar la configuración de las cabeceras de seguridad en aplicaciones web y APIs. Proporciona una forma rápida y sencilla de escanear y verificar la presencia y configuración adecuada de diversas cabeceras de seguridad comunes.
 
 La herramienta utiliza la biblioteca `requests` de Python para enviar solicitudes HTTP a un objetivo especificado y analizar las cabeceras de respuesta para determinar si se cumplen las mejores prácticas de seguridad. Proporciona resultados detallados que indican qué cabeceras están presentes y cuáles no, junto con recomendaciones sobre los valores de configuración recomendados.
 
